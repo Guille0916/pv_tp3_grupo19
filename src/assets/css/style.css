@@ -55,6 +55,24 @@ h1,h2,h3,h4{
     border-radius:10px; /* redondear el contenedor del nav */
 }
 
+
+
+
+
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    aling-items: center;
+    background-color:#1b3a4b;
+    padding: 1rem 2rem;
+    color: white;
+}
+
+
+
+
+
 .nav-link{
     padding:10px 18px; 
     background-color:var(--color-primario); 
