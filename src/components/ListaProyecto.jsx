@@ -6,7 +6,7 @@ import {
     agregarProyecto,
     eliminarProyecto,
     buscarProyecto,
-} from '../assets/services/proyectoService';
+} from '../services/proyectoService';
 
 function ListaProyecto() {
 
