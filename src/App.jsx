@@ -1,17 +1,21 @@
-import { useState } from 'react'
-import './assets/css/style.css'
+import './assets/static/styles/style.css'
 import Footer from './components/Footer.jsx'
 import Nav from './components/Nav.jsx'
-import Header from'./components/Header.jsx'
+import Header from './components/Header.jsx'
+import ListaProyecto from './components/ListaProyecto.jsx'
 
 function App() {
   return (
-    <>
-      <Header />
-      <Nav />
-      {/* El cartel de prueba viejo ya lo volamos para que quede limpio */}
-      <Footer />
-    </>
+    <div className="app">
+
+      <div className="app-header">
+        <Header></Header>
+        <Nav></Nav>
+      </div>
+      <ListaProyecto></ListaProyecto>
+      <Footer></Footer>
+
+    </div>
   );
 }
 
