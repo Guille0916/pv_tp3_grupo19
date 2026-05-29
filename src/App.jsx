@@ -2,7 +2,7 @@ import './assets/static/styles/style.css'
 import Footer from './components/Footer.jsx'
 import Nav from './components/Nav.jsx'
 import Header from './components/Header.jsx'
-import ListaProyecto from './components/ListaProyecto.jsx'
+import ListaProyectos from './components/ListaProyectos.jsx'
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Header></Header>
         <Nav></Nav>
       </div>
-      <ListaProyecto></ListaProyecto>
+      <ListaProyectos></ListaProyectos>
       <Footer></Footer>
 
     </div>
