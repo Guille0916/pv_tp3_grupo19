@@ -1,58 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../assets/static/styles/ListaProyectos.css';
 import DetalleProyecto from './DetalleProyecto';
+import FormularioProyecto from './FormularioProyecto';
 import ProyectoCard from './ProyectoCard';
-
 import RegistroActividad from './RegistroActividad';
 import {
   obtenerProyectos,
   agregarProyecto,
   eliminarProyecto,
-  buscarProyecto,
 } from '../services/proyectoService';
 
 function ListaProyectos() {
-  const [proyectos, setProyectos] = useState([]); // para guardar la lista de proyectos
+  const [proyectos, setProyectos] = useState(obtenerProyectos()); // para guardar la lista de proyectos y cargarla al iniciar el componente
+  const [busqueda, setBusqueda] = useState(''); // guarda el texto escrito en el buscador
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null); // guarda el proyecto elegido para ver el detalle
-  const [fechaActualizacion,setFechaActualizacion] = useState (null);// guarda la fecha y hora de la ultima actualizacion
-  const [formulario, setFormulario] = useState({ // guarda los datos que se escriben en el formulario
-    titulo: '',
-    categoria: '',
-    estado: '',
-    descripcion1: '',
-    descripcion2: '',
-    pdf: '',
-    drive: '',
-    github: '',
-    nombre: '',
-    rol: '',
-  });
+  const [fechaActualizacion, setFechaActualizacion] = useState(null); // guarda la fecha y hora de la ultima actualizacion
+  const primeraCarga = useRef(true); // evita registrar la carga inicial
 
   useEffect(() => {
-    setProyectos(obtenerProyectos()); // carga los proyectos al iniciar el componente
-  }, []);
-  useEffect(()=>{
-    if (proyectos.length>0){
-      const ahora= new Date();
-      const fecha = ahora.toLocaleDateString();
-      const horas = String(ahora.getHours()).padStart(2, '0');
-      const minutos = String(ahora.getMinutes()).padStart(2, '0');
-      const textoFormateado = `Ultima actualización en la pagina: ${fecha} a las ${horas}:${minutos} hs.`;
-      setFechaActualizacion(textoFormateado);
+    if (primeraCarga.current) {
+      primeraCarga.current = false;
+      return;
     }
-  },[proyectos.length]);
-  const cambiarFormulario = (event) => {
-    const { name, value } = event.target;
 
-    setFormulario({
-      ...formulario,
-      [name]: value,
-    });
-  };
+    const ahora = new Date();
+    const dia = String(ahora.getDate()).padStart(2, '0');
+    const mes = String(ahora.getMonth() + 1).padStart(2, '0');
+    const anio = ahora.getFullYear();
+    const horas = String(ahora.getHours()).padStart(2, '0');
+    const minutos = String(ahora.getMinutes()).padStart(2, '0');
 
-  const agregar = (event) => {
-    event.preventDefault();
+    setFechaActualizacion(`${dia}/${mes}/${anio} a las ${horas}:${minutos}`);
+  }, [proyectos]);
 
+  const agregar = (formulario) => {
     // Se desestructura el formulario para usar sus datos de forma mas clara.
     const {
       titulo,
@@ -80,19 +61,6 @@ function ListaProyectos() {
     agregarProyecto(proyecto);
     setProyectos([...obtenerProyectos()]); // se copia el arreglo para que React actualice la pantalla
     setProyectoSeleccionado(proyecto);
-
-    setFormulario({ // limpia los inputs despues de agregar
-      titulo: '',
-      categoria: '',
-      estado: '',
-      descripcion1: '',
-      descripcion2: '',
-      pdf: '',
-      drive: '',
-      github: '',
-      nombre: '',
-      rol: '',
-    });
   };
 
   const eliminar = (id) => {
@@ -106,22 +74,12 @@ function ListaProyectos() {
 
   const buscar = (event) => {
     const { value } = event.target;
-    setProyectos(buscarProyecto(value));
+    setBusqueda(value);
   };
 
-  // Se desestructura el estado para no escribir formulario.titulo, formulario.estado, etc.
-  const {
-    titulo,
-    categoria,
-    estado,
-    descripcion1,
-    descripcion2,
-    pdf,
-    drive,
-    github,
-    nombre,
-    rol,
-  } = formulario;
+  const proyectosFiltrados = proyectos.filter(({ titulo }) =>
+    titulo.toLowerCase().includes(busqueda.toLowerCase())
+  );
 
   return (
     <section className="proyectos-contenedor">
@@ -134,67 +92,15 @@ function ListaProyectos() {
 
           <div>
             <label htmlFor="buscar">Buscar proyecto</label>
-            <input id="buscar" type="text" placeholder="Buscar por titulo" onChange={buscar} />
+            <input id="buscar" type="text" placeholder="Buscar por titulo" value={busqueda} onChange={buscar} />
           </div>
         </div>
 
-        <form className="proyectos-formulario" onSubmit={agregar}>
-          <div>
-            <label htmlFor="titulo">Titulo</label>
-            <input id="titulo" name="titulo" type="text" required value={titulo} onChange={cambiarFormulario} />
-          </div>
-
-          <div>
-            <label htmlFor="categoria">Categoria</label>
-            <input id="categoria" name="categoria" type="text" required value={categoria} onChange={cambiarFormulario} />
-          </div>
-
-          <div>
-            <label htmlFor="estado">Estado</label>
-            <input id="estado" name="estado" type="text" required value={estado} onChange={cambiarFormulario} />
-          </div>
-
-          <div>
-            <label htmlFor="pdf">PDF</label>
-            <input id="pdf" name="pdf" type="text" required value={pdf} onChange={cambiarFormulario} />
-          </div>
-
-          <div>
-            <label htmlFor="drive">Drive</label>
-            <input id="drive" name="drive" type="text" required value={drive} onChange={cambiarFormulario} />
-          </div>
-
-          <div>
-            <label htmlFor="github">GitHub</label>
-            <input id="github" name="github" type="text" required value={github} onChange={cambiarFormulario} />
-          </div>
-
-          <div>
-            <label htmlFor="nombre">Integrante</label>
-            <input id="nombre" name="nombre" type="text" required value={nombre} onChange={cambiarFormulario} />
-          </div>
-
-          <div>
-            <label htmlFor="rol">Rol</label>
-            <input id="rol" name="rol" type="text" required value={rol} onChange={cambiarFormulario} />
-          </div>
-
-          <div className="campo-ancho">
-            <label htmlFor="descripcion1">Descripcion 1</label>
-            <input id="descripcion1" name="descripcion1" type="text" required value={descripcion1} onChange={cambiarFormulario} />
-          </div>
-
-          <div className="campo-ancho">
-            <label htmlFor="descripcion2">Descripcion 2</label>
-            <input id="descripcion2" name="descripcion2" type="text" required value={descripcion2} onChange={cambiarFormulario} />
-          </div>
-
-          <button type="submit">Agregar</button>
-        </form>
+        <FormularioProyecto onAgregarProyecto={agregar} />
 
         <div className="proyectos-contenido">
           <div className="proyectos-lista">
-            {proyectos.map((proyecto) => (
+            {proyectosFiltrados.map((proyecto) => (
               <ProyectoCard
                 key={proyecto.id}
                 proyecto={proyecto}
@@ -206,10 +112,12 @@ function ListaProyectos() {
 
           <DetalleProyecto proyecto={proyectoSeleccionado} />
         </div>
-        <RegistroActividad ultimaModificacion={fechaActualizacion} />
+
+        {fechaActualizacion && <RegistroActividad ultimaModificacion={fechaActualizacion} />}
       </div>
     </section>
   );
 }
 
 export default ListaProyectos;
+
