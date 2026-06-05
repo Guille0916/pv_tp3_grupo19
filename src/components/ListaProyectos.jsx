@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import '../assets/static/styles/ListaProyectos.css';
 import DetalleProyecto from './DetalleProyecto';
 import ProyectoCard from './ProyectoCard';
+
+import RegistroActividad from './RegistroActividad';
 import {
   obtenerProyectos,
   agregarProyecto,
@@ -12,6 +14,7 @@ import {
 function ListaProyectos() {
   const [proyectos, setProyectos] = useState([]); // para guardar la lista de proyectos
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null); // guarda el proyecto elegido para ver el detalle
+  const [fechaActualizacion,setFechaActualizacion] = useState (null);// guarda la fecha y hora de la ultima actualizacion
   const [formulario, setFormulario] = useState({ // guarda los datos que se escriben en el formulario
     titulo: '',
     categoria: '',
@@ -28,7 +31,16 @@ function ListaProyectos() {
   useEffect(() => {
     setProyectos(obtenerProyectos()); // carga los proyectos al iniciar el componente
   }, []);
-
+  useEffect(()=>{
+    if (proyectos.length>0){
+      const ahora= new Date();
+      const fecha = ahora.toLocaleDateString();
+      const horas = String(ahora.getHours()).padStart(2, '0');
+      const minutos = String(ahora.getMinutes()).padStart(2, '0');
+      const textoFormateado = `Ultima actualización en la pagina: ${fecha} a las ${horas}:${minutos} hs.`;
+      setFechaActualizacion(textoFormateado);
+    }
+  },[proyectos.length]);
   const cambiarFormulario = (event) => {
     const { name, value } = event.target;
 
@@ -194,6 +206,7 @@ function ListaProyectos() {
 
           <DetalleProyecto proyecto={proyectoSeleccionado} />
         </div>
+        <RegistroActividad ultimaModificacion={fechaActualizacion} />
       </div>
     </section>
   );
