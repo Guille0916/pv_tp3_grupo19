@@ -31,5 +31,10 @@
   font-weight: 700;
   text-align: left;
 }
+.logo-animado {
+  transition: transform 0.3s ease;
+}
 
-
+.logo-animado:hover {
+  transform: translateY(-6px) rotate(4deg) scale(1.08);
+}
