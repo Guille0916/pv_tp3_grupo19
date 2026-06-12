@@ -63,6 +63,12 @@ const obtenerProyectos = () => {
   return proyectos;
 };
 
+const obtenerProyectoPorId = (id) => {
+  return proyectos.find(
+    (proyecto) => proyecto.id === Number(id)
+  );
+};
+
 const agregarProyecto = (proyecto) => {
   // Agrega el proyecto nuevo al arreglo principal.
   proyectos.push(proyecto);
@@ -85,4 +91,5 @@ export {
   agregarProyecto,
   eliminarProyecto,
   buscarProyecto,
+  obtenerProyectoPorId,
 };

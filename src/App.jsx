@@ -21,8 +21,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="lista-proyectos" element={<ListaProyectos/>} />
-          <Route path="proyecto/:id" element={<DetalleProyecto />} />
+          <Route path="proyectos" element={<ListaProyectos />} />
+          <Route path="proyectos/:id" element={<DetalleProyecto />} />
           <Route path="perfil" element={<PerfilUsuario />} />
         </Routes>
       </main>
