@@ -25,6 +25,7 @@ function FormularioProyecto({ onAgregarProyecto }) {
     });
   };
 
+  
   const agregar = (event) => {
     event.preventDefault();
     onAgregarProyecto(formulario);
