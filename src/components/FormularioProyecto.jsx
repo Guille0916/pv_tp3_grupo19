@@ -25,6 +25,7 @@ function FormularioProyecto({ onAgregarProyecto }) {
     });
   };
 
+  
   const agregar = (event) => {
     event.preventDefault();
     onAgregarProyecto(formulario);
@@ -98,8 +99,8 @@ function FormularioProyecto({ onAgregarProyecto }) {
       </div>
 
       <button type="submit">
-        <svg className="boton-icono" width="16" height="16" fill="white" viewBox="0 0 24 24" aria-hidden="true" style={{ marginRight: '8px', verticalAlign: 'middle' }}>
-          <path d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5a1 1 0 0 1 1-1z"/>
+       <svg className="boton-icono" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5a1 1 0 0 1 1-1Z" />
         </svg>
         Agregar
       </button>
