@@ -25,6 +25,20 @@ function App() {
           <Route path="proyectos/:id" element={<DetalleProyecto />} />
           <Route path="perfil" element={<PerfilUsuario />} />
         </Routes>
+      <main className="container my-5"> 
+        <div className="row justify-content-center">
+          <div className="col-12 col-lg-10">
+            <Routes>
+              <Route path="/" element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="lista-proyectos" element={<ListaProyectos/>} />
+              <Route path="proyecto/:id" element={<DetalleProyecto />} />
+              <Route path="perfil" element={<PerfilUsuario />} />
+            </Routes>
+
+          </div>
+        </div>
+
       </main>
 
       <Footer></Footer>
