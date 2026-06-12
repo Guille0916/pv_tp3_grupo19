@@ -10,3 +10,27 @@
   margin: 0;
   font-size: 14px;
 }
+
+.footer-redes {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-redes a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #dce3ea;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-redes a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
