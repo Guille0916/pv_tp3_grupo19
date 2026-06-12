@@ -1,17 +1,32 @@
-function DetalleProyecto({ proyecto }) {
+import { useParams } from 'react-router-dom';
+import { obtenerProyectoPorId } from '../services/proyectoService';
+
+function DetalleProyecto() {
+  const { id } = useParams();
+
+  const proyecto = obtenerProyectoPorId(id);
+
   if (!proyecto) {
-    return <p className="detalle-vacio">Selecciona un proyecto para ver los detalles.</p>;
+    return (
+      <p className="detalle-vacio">
+        Proyecto no encontrado.
+      </p>
+    );
   }
 
-  // Se desestructura el proyecto seleccionado para mostrar el detalle.
-  const { titulo, descripcionExtendida, recursos, equipo } = proyecto;
+  const {
+    titulo,
+    descripcionExtendida,
+    recursos,
+    equipo,
+  } = proyecto;
 
   return (
     <article className="detalle-proyecto">
       <h2>{titulo}</h2>
 
       <section>
-        <h3>Descripcion extendida</h3>
+        <h3>Descripción extendida</h3>
         {descripcionExtendida.map((parrafo, index) => (
           <p key={index}>{parrafo}</p>
         ))}

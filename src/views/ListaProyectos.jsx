@@ -13,7 +13,6 @@ import {
 function ListaProyectos() {
   const [proyectos, setProyectos] = useState(obtenerProyectos()); // para guardar la lista de proyectos y cargarla al iniciar el componente
   const [busqueda, setBusqueda] = useState(''); // guarda el texto escrito en el buscador
-  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null); // guarda el proyecto elegido para ver el detalle
   const [fechaActualizacion, setFechaActualizacion] = useState(null); // guarda la fecha y hora de la ultima actualizacion
   const primeraCarga = useRef(true); // evita registrar la carga inicial
 
@@ -104,15 +103,11 @@ function ListaProyectos() {
               <ProyectoCard
                 key={proyecto.id}
                 proyecto={proyecto}
-                onVerDetalle={setProyectoSeleccionado}
                 onEliminar={eliminar}
               />
             ))}
           </div>
-
-          <DetalleProyecto proyecto={proyectoSeleccionado} />
         </div>
-
         {fechaActualizacion && <RegistroActividad ultimaModificacion={fechaActualizacion} />}
       </div>
     </section>
