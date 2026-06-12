@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import '../assets/static/styles/ListaProyectos.css';
 import DetalleProyecto from './DetalleProyecto';
-import FormularioProyecto from './FormularioProyecto';
-import ProyectoCard from './ProyectoCard';
-import RegistroActividad from './RegistroActividad';
+import FormularioProyecto from '../components/FormularioProyecto';
+import ProyectoCard from '../components/ProyectoCard';
+import RegistroActividad from '../components/RegistroActividad';
 import {
   obtenerProyectos,
   agregarProyecto,
