@@ -8,7 +8,6 @@
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
   gap: 6px;
   margin: 0;
@@ -16,7 +15,9 @@
 }
 
 .nav-links a {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   padding: 8px 12px;
   border-radius: 6px;
   color: #dce3ea;
@@ -32,3 +33,19 @@
   color: #181d25;
 }
 
+.nav-links a.active {
+  background-color: #ffffff;
+  color: #181d25;
+}
+
+@media (max-width: 760px) {
+  .navbar {
+    justify-content: center;
+    padding: 14px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

@@ -20,16 +20,17 @@ function App() {
       </div>
 
       {/* Un solo main global con el diseño responsivo de Bootstrap */}
-      <main className="container my-5"> 
+      <main className="container my-5">
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10">
 
             <Routes>
-              <Route path="/" element={<Navigate to="dashboard" replace />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="proyectos" element={<ListaProyectos />} />
-              <Route path="proyectos/:id" element={<DetalleProyecto />} />
-              <Route path="perfil" element={<PerfilUsuario />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/proyectos" element={<ListaProyectos />} />
+              <Route path="/proyectos/:id" element={<DetalleProyecto />} />
+              <Route path="/perfil" element={<PerfilUsuario />} />
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
 
           </div>

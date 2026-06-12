@@ -44,3 +44,40 @@ h3 {
   justify-content: space-between;
   background-color: var(--color-oscuro);
 }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  text-transform: none;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(24, 29, 37, 0.12);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.icono {
+  min-width: 18px;
+  flex: 0 0 auto;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover .icono,
+.nav-links a:hover .icono,
+.nav-links a.active .icono,
+.footer-redes a:hover .icono {
+  transform: scale(1.08);
+}
+
+@media (max-width: 760px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -2,11 +2,9 @@ import '../assets/static/styles/RegistroActividad.css';
 
 function RegistroActividad({ ultimaModificacion }) {
   return (
-    <div className="contenedor-registro-actividad">
-      <h5 className="contenedor-titulo-registro">Historial de Cambios</h5>
-      <p className="texto-registro">
-        Última actualización de la lista: {ultimaModificacion} hs.
-      </p>
+    <div className="alert alert-info mt-4 mb-0" role="alert">
+      <h5 className="alert-heading h6">Historial de Cambios</h5>
+      Última actualización de la lista: {ultimaModificacion} hs.
     </div>
   );
 }
