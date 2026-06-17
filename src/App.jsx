@@ -4,6 +4,8 @@ import Footer from './components/Footer.jsx'
 import Nav from './components/Nav.jsx'
 import Header from './components/Header.jsx'
 
+import { UsuarioProvider } from './context/UsuarioContext.jsx'
+
 // Importaciones desde la carpeta views
 import Dashboard from './views/Dashboard.jsx'
 import ListaProyectos from './views/ListaProyectos.jsx'
@@ -12,34 +14,37 @@ import PerfilUsuario from './views/PerfilUsuario.jsx'
 
 function App() {
   return (
-    <div className="app">
+    
+    <UsuarioProvider>
+      <div className="app">
 
-      <div className="app-header">
-        <Header></Header>
-        <Nav></Nav>
-      </div>
-
-      {/* Un solo main global con el diseño responsivo de Bootstrap */}
-      <main className="container my-5">
-        <div className="row justify-content-center">
-          <div className="col-12 col-lg-10">
-
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/proyectos" element={<ListaProyectos />} />
-              <Route path="/proyectos/:id" element={<DetalleProyecto />} />
-              <Route path="/perfil" element={<PerfilUsuario />} />
-              <Route path="*" element={<Navigate to="/dashboard" replace />} />
-            </Routes>
-
-          </div>
+        <div className="app-header">
+          <Header></Header>
+          <Nav></Nav>
         </div>
-      </main>
 
-      <Footer></Footer>
+        {/* Un solo main global con el diseño responsivo de Bootstrap */}
+        <main className="container my-5">
+          <div className="row justify-content-center">
+            <div className="col-12 col-lg-10">
 
-    </div>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/proyectos" element={<ListaProyectos />} />
+                <Route path="/proyectos/:id" element={<DetalleProyecto />} />
+                <Route path="/perfil" element={<PerfilUsuario />} />
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
+              </Routes>
+
+            </div>
+          </div>
+        </main>
+
+        <Footer></Footer>
+
+      </div>
+    </UsuarioProvider>
   );
 }
 
