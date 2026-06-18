@@ -118,7 +118,7 @@ function ListaProyectos() {
             </p>
           )}
 
-          {fechaActualizacion && <RegistroActividad ultimaModificacion={fechaActualizacion} />}
+          <RegistroActividad ultimaModificacion={fechaActualizacion} />
         </div>
       </div>
     </section>
