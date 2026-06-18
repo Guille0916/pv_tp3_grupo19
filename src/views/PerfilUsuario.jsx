@@ -1,12 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UsuarioContext } from "../context/UsuarioContext";
 
 const PerfilUsuario = () => {
   const { usuario, actualizarPerfil } = useContext(UsuarioContext);
 
   const [editando, setEditando] = useState(false);
-
   const [formulario, setFormulario] = useState(usuario);
+
+  useEffect(() => {
+    setFormulario(usuario);
+  }, [usuario]);
 
   const handleChange = (e) => {
     setFormulario({
@@ -46,7 +49,7 @@ const PerfilUsuario = () => {
                 </li>
 
                 <li className="list-group-item">
-                  <strong>Institución:</strong> {usuario.institucion}
+                  <strong>Institucion:</strong> {usuario.institucion}
                 </li>
               </ul>
             </div>
@@ -112,7 +115,7 @@ const PerfilUsuario = () => {
 
                   <div className="mb-3">
                     <label className="form-label">
-                      Institución
+                      Institucion
                     </label>
 
                     <input
