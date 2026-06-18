@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import '../assets/static/styles/Header.css';
 import logoEducacion from '../assets/img/logo-educacion.png';
-import { useContext } from 'react';
 import { UsuarioContext } from '../context/UsuarioContext';
 const Header = () => {
   const { usuario } = useContext(UsuarioContext);
